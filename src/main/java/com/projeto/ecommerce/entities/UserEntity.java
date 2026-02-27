@@ -1,5 +1,7 @@
 package com.projeto.ecommerce.entities;
 
+import com.projeto.ecommerce.DTO.OrderResquestDTO;
+import com.projeto.ecommerce.DTO.UserRequestDTO;
 import com.projeto.ecommerce.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,4 +36,12 @@ public class UserEntity {
     @OneToMany(mappedBy = "client")
 //  Criando uma lista pra mostrar todos os pedidos dos Usuários
     private List<OrderEntity> orders = new ArrayList<>();
+
+    public UserEntity(UserRequestDTO dto) {
+        this.name = dto.getName();
+        this.email = dto.getEmail();
+        this.phone = dto.getPhone();
+        this.password = dto.getPassword();
+        this.roles = dto.getRoles();
+    }
 }

@@ -1,12 +1,21 @@
 package com.projeto.ecommerce.entities;
 
+import com.projeto.ecommerce.DTO.OrderResquestDTO;
 import com.projeto.ecommerce.enums.StatusDoPedido;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +28,11 @@ public class OrderEntity {
     @JoinColumn(name  = "cliente_id")
     private UserEntity client;
 
-    @OneToOne
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private PaymentEntity payment;
+
+    public OrderEntity(OrderResquestDTO dto) {
+        this.status = dto.getStatus();
+        this.moment = dto.getMoment();
+    }
 }
