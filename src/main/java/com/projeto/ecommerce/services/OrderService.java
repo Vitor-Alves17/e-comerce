@@ -13,15 +13,12 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
     }
-
-
-
 
     public String createOrder(OrderResquestDTO dto, UUID id) {
         UserEntity user = userRepository.getReferenceById(id);
