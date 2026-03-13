@@ -15,6 +15,7 @@ public class OrderResponseDTO {
     public OrderResponseDTO(OrderEntity order){
         this.moment = order.getMoment();
         this.status = order.getStatus();
+
     }
 
     @Override

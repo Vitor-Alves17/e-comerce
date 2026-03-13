@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -30,6 +32,9 @@ public class OrderEntity {
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private PaymentEntity payment;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> items= new HashSet<>();
 
     public OrderEntity(OrderResquestDTO dto) {
         this.status = dto.getStatus();
