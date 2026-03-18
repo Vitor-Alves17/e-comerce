@@ -1,6 +1,8 @@
 package com.projeto.ecommerce.entities;
 
 
+import com.projeto.ecommerce.DTO.OrderItemResponseDTO;
+import com.projeto.ecommerce.DTO.OrderItemResquestDTO;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,13 @@ public class OrderItemEntity {
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public OrderItemEntity(OrderEntity order, ProductEntity product, OrderItemResquestDTO dto) {
+        id.setOrder(order);
+        id.setProduct(product);
+        this.quantity = dto.getQuantity();
+        this.price = dto.getPrice();
     }
 
     public OrderEntity getOrder(){

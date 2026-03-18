@@ -1,5 +1,6 @@
 package com.projeto.ecommerce.entities;
 
+import com.projeto.ecommerce.DTO.ProductRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,4 +33,11 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItemEntity> items = new HashSet<>();
+
+    public ProductEntity(ProductRequestDTO dto) {
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.price = dto.getPrice();
+        this.imgURL = dto.getImgURL();
+    }
 }

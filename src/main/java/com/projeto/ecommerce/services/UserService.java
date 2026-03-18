@@ -16,7 +16,7 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public List<UserEntity> getU(){
+    public List<UserEntity> getUser(){
         List<UserEntity> users = userRepo.findAll();
         return users;
     }

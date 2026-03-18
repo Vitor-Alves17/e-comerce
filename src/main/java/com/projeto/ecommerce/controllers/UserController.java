@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("/showall")
     public List<UserEntity> showall(){
-        return service.getU();
+        return service.getUser();
     }
 
     @PostMapping("/user")
