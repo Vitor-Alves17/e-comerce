@@ -9,22 +9,18 @@ import com.projeto.ecommerce.entities.ProductEntity;
 import com.projeto.ecommerce.repositories.OrderItemRepository;
 import com.projeto.ecommerce.repositories.OrderRepository;
 import com.projeto.ecommerce.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class OrderItemService {
 
     private final OrderItemRepository orderItemRepo;
     private final ProductRepository productRepo;
     private final OrderRepository orderRepo;
-
-    public OrderItemService(OrderItemRepository orderItemRepo, ProductRepository productRepo, OrderRepository orderRepo) {
-        this.orderItemRepo = orderItemRepo;
-        this.productRepo = productRepo;
-        this.orderRepo = orderRepo;
-    }
 
 
     public String newOrderItem(UUID product_id, UUID order_id, OrderItemResquestDTO dto){
@@ -43,5 +39,28 @@ public class OrderItemService {
         pK.setProduct(product);
         OrderItemEntity orderItem = orderItemRepo.findById(pK).orElseThrow(()->new RuntimeException("Não encontrado"));
         return new OrderItemResponseDTO(orderItem);
+    }
+
+    public String updateOrderItem(UUID product_id, UUID order_id,OrderItemResquestDTO dto){
+        OrderItemPK pK = new OrderItemPK();
+        ProductEntity product = productRepo.findById(product_id).orElseThrow(() -> new RuntimeException("Product not found"));
+        OrderEntity order = orderRepo.findById(order_id).orElseThrow(() -> new RuntimeException("Order not found"));
+        pK.setOrder(order);
+        pK.setProduct(product);
+        OrderItemEntity orderItem = orderItemRepo.findById(pK).orElseThrow(()->new RuntimeException("Não encontrado"));
+        orderItem.setQuantity(dto.getQuantity());
+        orderItem.setPrice(dto.getPrice());
+        return "Updated sucefully";
+    }
+
+    public String removeOrderItemById(UUID product_id, UUID order_id){
+        OrderItemPK pK = new OrderItemPK();
+        ProductEntity product = productRepo.findById(product_id).orElseThrow(() -> new RuntimeException("Product not found"));
+        OrderEntity order = orderRepo.findById(order_id).orElseThrow(() -> new RuntimeException("Order not found"));
+        pK.setOrder(order);
+        pK.setProduct(product);
+        OrderItemEntity orderItem = orderItemRepo.findById(pK).orElseThrow(()->new RuntimeException("Não encontrado"));
+        orderItemRepo.deleteById(pK);
+        return "Deleted sucefully";
     }
 }

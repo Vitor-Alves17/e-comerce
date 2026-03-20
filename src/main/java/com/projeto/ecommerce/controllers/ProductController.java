@@ -6,12 +6,10 @@ import com.projeto.ecommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class ProductController {
@@ -30,5 +28,15 @@ public class ProductController {
     @GetMapping("producties")
     public List<ProductResponseDTO> getAll(){
         return service.getAll();
+    }
+
+    @PutMapping("product/update/{id}")
+    public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductRequestDTO dto, @PathVariable UUID id){
+        return ResponseEntity.ok(service.updateProduct(dto, id));
+    }
+
+    @DeleteMapping("product/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable UUID id){
+        return ResponseEntity.ok(service.deleteProductById(id));
     }
 }

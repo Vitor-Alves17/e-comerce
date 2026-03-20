@@ -1,7 +1,7 @@
 package com.projeto.ecommerce.entities;
 
 import com.projeto.ecommerce.DTO.OrderResquestDTO;
-import com.projeto.ecommerce.enums.StatusDoPedido;
+import com.projeto.ecommerce.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private LocalDate moment;
-    private StatusDoPedido status;
+    private OrderStatus status;
 //  Anotation pra falar que é uma relação de muitos pra 1
     @ManyToOne
 //  define qual coluna será usada como chave estrangeira na tabela

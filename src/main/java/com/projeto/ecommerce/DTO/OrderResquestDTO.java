@@ -1,6 +1,6 @@
 package com.projeto.ecommerce.DTO;
 
-import com.projeto.ecommerce.enums.StatusDoPedido;
+import com.projeto.ecommerce.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ import java.time.LocalDate;
 public class OrderResquestDTO {
 
     private LocalDate moment;
-    private StatusDoPedido status;
+    private OrderStatus status;
 }

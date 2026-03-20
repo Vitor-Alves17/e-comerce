@@ -29,4 +29,14 @@ public class OrderItemController {
     public ResponseEntity<?> newOrderItem(@PathVariable UUID product_id, @PathVariable UUID order_id, @Valid @RequestBody OrderItemResquestDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.newOrderItem(product_id, order_id, dto));
     }
+
+    @PutMapping("/order/{order_id}/product/{product_id}")
+    public ResponseEntity<?> updateOrderItem(@PathVariable UUID product_id, @PathVariable UUID order_id, @Valid @RequestBody OrderItemResquestDTO dto){
+        return ResponseEntity.ok(service.updateOrderItem(product_id, order_id, dto));
+    }
+
+    @DeleteMapping("/order/{order_id}/product/{product_id}")
+    public ResponseEntity<?> deleteOrderItem(@PathVariable UUID product_id, @PathVariable UUID order_id){
+        return ResponseEntity.ok(service.removeOrderItemById(product_id, order_id));
+    }
 }

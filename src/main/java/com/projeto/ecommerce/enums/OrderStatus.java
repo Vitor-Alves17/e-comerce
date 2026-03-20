@@ -1,6 +1,6 @@
 package com.projeto.ecommerce.enums;
 
-public enum StatusDoPedido {
+public enum OrderStatus {
     AWAITING_PAYMENT,
     PAID,
     SHIPPED,

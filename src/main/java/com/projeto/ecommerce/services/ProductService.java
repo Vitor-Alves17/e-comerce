@@ -2,7 +2,9 @@ package com.projeto.ecommerce.services;
 
 import com.projeto.ecommerce.DTO.ProductRequestDTO;
 import com.projeto.ecommerce.DTO.ProductResponseDTO;
+import com.projeto.ecommerce.DTO.UserRequestDTO;
 import com.projeto.ecommerce.entities.ProductEntity;
+import com.projeto.ecommerce.entities.UserEntity;
 import com.projeto.ecommerce.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,24 @@ public class ProductService {
         ProductEntity product = new ProductEntity(dto);
         productRepo.save(product);
         return "Product created sucefully";
+    }
+
+    public String updateProduct(ProductRequestDTO dto, UUID id){
+        ProductEntity product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setImgURL(dto.getImgURL());
+        productRepo.save(product);
+        return "Updated sucefully";
+    }
+
+    public String deleteProductById(UUID id) {
+        if (productRepo.existsById(id)) {
+            productRepo.deleteById(id);
+            return "Product deleted sucefully";
+        } else {
+            return "Product not found";
+        }
     }
 }
