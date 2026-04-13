@@ -29,7 +29,7 @@ public class UserEntity {
     private String phone;
     private String password;
 //  Salvar no banco com as informações do Enum e não com zero, 1, 2...
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
 //  vai servir pra gerenciar as permissões do usuário
     private RoleEnum roles;
 //  Anotation pra falar que é uma relaçao 1 para muitos baseado na chave estrangeira client
