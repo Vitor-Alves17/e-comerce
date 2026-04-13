@@ -5,6 +5,7 @@ import com.projeto.ecommerce.DTO.UserResponseDTO;
 import com.projeto.ecommerce.entities.UserEntity;
 import com.projeto.ecommerce.repositories.UserRepository;
 import org.apache.catalina.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepo) {
+    public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserResponseDTO> getUser(){
@@ -26,6 +29,7 @@ public class UserService {
 
     public String createUser(UserRequestDTO dto){
         UserEntity user = new UserEntity(dto);
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepo.save(user);
         return "User created sucefully";
     }

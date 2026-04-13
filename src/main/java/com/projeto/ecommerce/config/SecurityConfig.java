@@ -18,11 +18,10 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users").permitAll()
+                        .requestMatchers("/showall").permitAll()
                         .requestMatchers("/product").hasRole("ADMIN")
-                        .requestMatchers("/product/update/").hasRole("ADMIN")
-                        .requestMatchers("/product/delete/").hasRole("ADMIN")
-                        .requestMatchers("").hasRole("ADMIN")
+                        .requestMatchers("/product/update/**").hasRole("ADMIN")
+                        .requestMatchers("/product/delete/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
