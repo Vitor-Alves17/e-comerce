@@ -1,0 +1,2 @@
+insert into user_entity (id, name, email,password, phone, roles) values (UUID_TO_BIN('1583024c-bcd3-444f-9ca4-b5727b46c0f9'), 'Albertina', 'aomonahanrq@usda.gov', '687-212-3547', 'cD0''26O}vc(m/C}cE', 1);
+insert into user_entity (id, name, email, password, phone, roles) values (UUID_TO_BIN('de0a70bb-75ec-486e-93a3-dbda819faa61'), 'Daveen', 'dcamoysrr@mayoclinic.com', '695-683-7120', 'tK1<7KJ0q', 1);
