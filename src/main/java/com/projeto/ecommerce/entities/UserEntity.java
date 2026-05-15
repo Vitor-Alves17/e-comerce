@@ -28,6 +28,7 @@ public class UserEntity {
     private String email;
     private String phone;
     private String password;
+    private String photo;
 //  Salvar no banco com as informações do Enum e não com zero, 1, 2...
 //    @Enumerated(EnumType.STRING)
 //  vai servir pra gerenciar as permissões do usuário

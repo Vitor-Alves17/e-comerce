@@ -28,10 +28,11 @@ public class UserService {
         return users.stream().map(UserResponseDTO::new).toList();
     }
 
-    public String createUser(UserRequestDTO dto){
+    public String createUser(UserRequestDTO dto, String path){
         UserEntity user = new UserEntity(dto);
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRoles(RoleEnum.ROLE_USER);
+        user.setPhoto(path);
         userRepo.save(user);
         return "User created sucefully";
     }
