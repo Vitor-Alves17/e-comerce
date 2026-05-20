@@ -25,18 +25,19 @@ public class ProductService {
         return producties.stream().map(ProductResponseDTO::new).toList();
     }
 
-    public String newProduct(ProductRequestDTO dto){
+    public String newProduct(ProductRequestDTO dto, String path) {
         ProductEntity product = new ProductEntity(dto);
+        product.setImgURL(path);
         productRepo.save(product);
         return "Product created sucefully";
     }
 
-    public String updateProduct(ProductRequestDTO dto, UUID id){
+    public String updateProduct(ProductRequestDTO dto, UUID id, String path) {
         ProductEntity product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
-        product.setImgURL(dto.getImgURL());
+        product.setImgURL(path);
         productRepo.save(product);
         return "Updated sucefully";
     }
